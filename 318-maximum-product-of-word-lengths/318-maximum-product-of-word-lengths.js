@@ -6,8 +6,8 @@ var maxProduct = function(words) {
     let count = 0
     for(let i=0; i<words.length; i++){
         const a = words[i]
-        for(let j=0; j<words.length; j++){
-            if(i===j) continue
+        for(let j=words.length-1; j>i; j--){
+            // if(i===j) continue
             const b = words[j]
             if(checkUnique(a,b)){
                 count = Math.max(count, a.length * b.length)
