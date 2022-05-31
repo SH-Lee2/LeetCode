@@ -1,10 +1,8 @@
 var hasAllCodes = function(s, k) {
-    const n = s.length;
-    const kCodes = new Set();
+    const binaryCodes = new Set();
     
-    for (let i = 0; i + k <= n; i++) {
-        kCodes.add(s.slice(i, i + k));
+    for (let i = 0; i<= s.length-k; i++) {
+        binaryCodes.add(s.substring(i,i+k));
     }
-    
-    return kCodes.size === Math.pow(2, k);
+    return binaryCodes.size === Math.pow(2, k);
 };
