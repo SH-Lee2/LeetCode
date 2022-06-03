@@ -1,29 +1,13 @@
-/**
- * @param {number[][]} matrix
- */
-var NumMatrix = function(matrix) {
-    this.matrix = matrix    
+class NumMatrix {
+    constructor(M) {
+        let ylen = M.length + 1, xlen = M[0].length + 1
+        this.dp = Array.from({length: ylen}, () => new Array(xlen).fill(0))
+        for (let i = 1; i < ylen; i++)
+            for (let j = 1; j < xlen; j++)
+                this.dp[i][j] = M[i-1][j-1] + this.dp[i-1][j] + this.dp[i][j-1] - this.dp[i-1][j-1]
+    }
+    
+    sumRegion(R1, C1, R2, C2) {
+        return this.dp[R2+1][C2+1] - this.dp[R2+1][C1] - this.dp[R1][C2+1] + this.dp[R1][C1]
+    }
 };
-
-/** 
- * @param {number} row1 
- * @param {number} col1 
- * @param {number} row2 
- * @param {number} col2
- * @return {number}
- */
-NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
-    let sum = 0 
-    for(let row=row1; row<=row2; row++){
-        for(let col=col1; col<=col2; col++){
-            sum += this.matrix[row][col]
-        }
-    }  
-    return sum
-};
-
-/** 
- * Your NumMatrix object will be instantiated and called as such:
- * var obj = new NumMatrix(matrix)
- * var param_1 = obj.sumRegion(row1,col1,row2,col2)
- */
