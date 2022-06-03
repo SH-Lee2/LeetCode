@@ -6,6 +6,7 @@ var NumMatrix = function(matrix) {
     this.dp = Array.from(Array(matrix.length + 1),()=>Array(matrix[0].length +1).fill(0))
     for (let r = 0; r < matrix.length; r++) {
         for (let c = 0; c < matrix[0].length; c++) {
+            // 현재값에 이전까지 더한 값을 더 함
             this.dp[r][c + 1] = this.dp[r][c] + matrix[r][c];
         }
     } 
