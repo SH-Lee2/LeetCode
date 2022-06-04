@@ -13,7 +13,7 @@ var solveNQueens = function(n) {
     
     function backTrack(r){
         if(r === n){
-            res.push(board.slice())
+            res.push(board.map(row=>row.join('')))
             return 
         }
         for(let c=0; c<n; c++){
@@ -24,13 +24,11 @@ var solveNQueens = function(n) {
             negDiag.add(r+c)
             // board[r][c] = "Q"
             board[r][c] = "Q"
-            board[r] = board[r].join('')
             backTrack(r+1)
             
             col.delete(c)
             posDiag.delete(r-c)
             negDiag.delete(r+c)
-            board[r] = board[r].split('')
             board[r][c] = "."
         }
     }
