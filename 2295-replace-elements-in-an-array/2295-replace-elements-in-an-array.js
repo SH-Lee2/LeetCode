@@ -9,12 +9,11 @@ var arrayChange = function(nums, operations) {
         list[nums[i]] = i
     }
    for(let i=0; i<operations.length; i++){
-       // const idx = list[operations[i][0]] === undefined ?   -1 : list[operations[i][0]]
-       // if(idx >= 0 ){
+       const idx = list[operations[i][0]] === undefined ?   -1 : list[operations[i][0]]
+       if(idx >= 0 ){
            nums[list[operations[i][0]]] = operations[i][1]
-           // delete list[operations[i][0]]
-           list[operations[i][1]] = list[operations[i][0]]
-       // } 
+           list[operations[i][1]] = idx
+       } 
    }
     return nums
 };
