@@ -8,8 +8,7 @@ var longestNiceSubarray = function(nums) {
         let cur = nums[i]
         for(let j=i+1; j<nums.length && (cur & nums[j]) === 0; j++){
             cur |= nums[j]
-           
-        max = Math.max(max, j-i + 1)
+            max = Math.max(max, j-i + 1)
         }
     }
     return max
