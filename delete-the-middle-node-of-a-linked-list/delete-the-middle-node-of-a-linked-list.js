@@ -31,5 +31,4 @@ var deleteMiddle = function(head) {
     nodeToRemove.next = null 
     
     return head
-    
 };
