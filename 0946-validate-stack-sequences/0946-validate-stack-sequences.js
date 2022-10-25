@@ -11,7 +11,7 @@ var validateStackSequences = function(pushed, popped) {
     
     for(const val of pushed){
         stack.push(val)
-        while(stack && idx < len && stack[stack.length-1] === popped[idx]){
+        while(idx < len && stack[stack.length-1] === popped[idx]){
             stack.pop()
             idx++
         }
