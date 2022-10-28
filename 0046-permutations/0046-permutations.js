@@ -5,7 +5,8 @@
 var permute = function(nums) {
     const checkNums = Array.from({length:nums.length},()=>false) 
     const ans = [] 
-    const tmp=Array.from({length:nums.length}, ()=>0);
+    const tmp=[]
+    
     const helper = (len) => {
         if(len === nums.length) {
             ans.push(tmp.slice())
