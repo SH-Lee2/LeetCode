@@ -3,16 +3,16 @@
  * @return {boolean}
  */
 var areOccurrencesEqual = function(s) {
-    const counts = new Map()
+    const map = new Map()
     
     for(const c of s){
-        counts.set(c, (counts.get(c) || 0) + 1);
+        map.set(c, (map.get(c)|| 0) +1)
     }
     
-    let frequencies = new Set();
-    for (const val of counts.values()) {
-        frequencies.add(val);
+    const set = new Set()
+    for(const value of map.values()){
+        set.add(value)
     }
-
-    return frequencies.size == 1;
+    
+    return set.size === 1
 };
