@@ -3,20 +3,20 @@
  * @return {number}
  */
 var minimumCardPickup = function(cards) {
-    const map = new Map() 
-    
-    let min = Infinity
-    
-    for(let i=0; i<cards.length; i++){
-        const card = cards[i]
-        
-        if(map.has(card)){
-            const startIdx = map.get(card)
-            map.set(card, i)
-            min = Math.min(min, i - startIdx)        
+    let dic = new Map();
+    for (let i = 0; i < cards.length; i++) {
+        if (!dic.has(cards[i])) {
+            dic.set(cards[i], []);
         }
-        map.set(card, i)
+        dic.get(cards[i]).push(i);
     }
     
-    return min === Infinity ? -1 : min + 1
+    let ans = Infinity;
+    for (const [key, arr] of dic) {
+        for (let i = 0; i < arr.length - 1; i++) {
+            ans = Math.min(ans, arr[i + 1] - arr[i] + 1);
+        }
+    }
+    
+    return ans == Infinity ? -1 : ans;
 };
