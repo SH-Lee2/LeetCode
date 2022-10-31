@@ -8,7 +8,7 @@ var equalPairs = function(grid) {
     const len = grid.length
     
     function getKey (arr) {
-        return arr.reduce((a,b)=> a+','+b)
+        return arr.reduce((a,b)=> a+','+b) // [11,1][1,11] 일경우 대비해서 구분자를 추가해준다.
     }
     
     for(const row of grid){
@@ -31,7 +31,7 @@ var equalPairs = function(grid) {
     
     for(const [key,value] of rows){
         if(cols.has(key)){
-            ans += value * cols.get(key)
+            ans += value * cols.get(key)  // 예제처럼 rows가 cols보다 작은경우 
         }
     }
     
