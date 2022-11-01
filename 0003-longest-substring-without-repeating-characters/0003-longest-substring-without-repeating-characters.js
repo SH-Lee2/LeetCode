@@ -9,7 +9,6 @@ var lengthOfLongestSubstring = function(s) {
     
     for(let i=0; i<s.length; i++){
         if(map.has(s[i])){
-            // 길이 체크 
             left = Math.max(map.get(s[i]), left)
         }
         ans = Math.max(ans, i + 1 - left)
