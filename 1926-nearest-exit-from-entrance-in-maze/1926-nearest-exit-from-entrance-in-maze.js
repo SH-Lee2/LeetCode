@@ -16,7 +16,6 @@ var nearestExit = function(maze, entrance) {
     
     maze[initX][initY] = '+'
     
-    let ans = Infinity 
     
     const isValid =(x, y) => {
         return x >= 0 && x < rows && y >= 0 && y < cols && maze[x][y] === '.';
@@ -25,6 +24,9 @@ var nearestExit = function(maze, entrance) {
     const isExit =(x, y) => {
         return x === 0 || x === rows - 1 || y === 0 || y === cols - 1;
     }
+    
+    let ans = Infinity 
+
     
     while(queue.length){
         const [x,y] = queue.shift()
