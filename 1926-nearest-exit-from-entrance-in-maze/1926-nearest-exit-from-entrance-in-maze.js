@@ -8,15 +8,23 @@ var nearestExit = function(maze, entrance) {
     const dy = [0,1,0,-1]
     
     const queue = [entrance]
-    const row = maze.length
-    const col = maze[0].length
+    const rows = maze.length
+    const cols = maze[0].length
     
-    const tmp = Array.from(Array(row), ()=> Array(col).fill(0))
+    const tmp = Array.from(Array(rows), ()=> Array(cols).fill(0))
     const [initX, initY] = entrance
     
     maze[initX][initY] = '+'
     
     let ans = Infinity 
+    
+    const isValid =(x, y) => {
+        return x >= 0 && x < rows && y >= 0 && y < cols && maze[x][y] === '.';
+    }
+    
+    const isExit =(x, y) => {
+        return x === 0 || x === rows - 1 || y === 0 || y === cols - 1;
+    }
     
     while(queue.length){
         const [x,y] = queue.shift()
@@ -24,16 +32,14 @@ var nearestExit = function(maze, entrance) {
         for(let i=0; i<4; i++){
             const nx = x + dx[i]
             const ny = y + dy[i]
-            if(nx < row && nx >= 0 && ny < col && ny >= 0){
+            if(isValid(nx,ny)){
                 if(maze[nx][ny] === '+') continue
                 
                 tmp[nx][ny] = tmp[x][y] + 1
                 maze[nx][ny] = "+"
                 
-                if(tmp[nx][ny] !== 0) {
-                    if(nx === 0 || nx === row-1 || ny === 0 || ny === col-1  ){
-                        ans = Math.min(ans, tmp[nx][ny])
-                    }
+                if(isExit(nx,ny)){
+                    ans = Math.min(ans, tmp[nx][ny])
                 }
                 
                 queue.push([nx,ny])
