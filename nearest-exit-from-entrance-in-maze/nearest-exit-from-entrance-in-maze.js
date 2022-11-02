@@ -7,39 +7,46 @@ var nearestExit = function(maze, entrance) {
     const dx = [-1,0,1,0]
     const dy = [0,1,0,-1]
     
-    const queue = [entrance]
-    const row = maze.length
-    const col = maze[0].length
-    
-    const tmp = Array.from(Array(row), ()=> Array(col).fill(0))
     const [initX, initY] = entrance
-    
     maze[initX][initY] = '+'
     
-    let ans = Infinity 
+    const queue = [[initX, initY, 0]]
+    const rows = maze.length
+    const cols = maze[0].length
     
+    // const tmp = Array.from(Array(rows), ()=> Array(cols).fill(0))
+    
+    
+    
+    const isValid =(x, y) => {
+        return x >= 0 && x < rows && y >= 0 && y < cols && maze[x][y] === '.';
+    }
+    
+    const isExit =(x, y) => {
+        return x === 0 || x === rows - 1 || y === 0 || y === cols - 1;
+    }
+    
+    let ans = -1 
+
     while(queue.length){
-        const [x,y] = queue.shift()
+        let [x,y, distance] = queue.shift()
         
         for(let i=0; i<4; i++){
             const nx = x + dx[i]
             const ny = y + dy[i]
-            if(nx < row && nx >= 0 && ny < col && ny >= 0){
+            if(isValid(nx,ny)){
                 if(maze[nx][ny] === '+') continue
                 
-                tmp[nx][ny] = tmp[x][y] + 1
                 maze[nx][ny] = "+"
                 
-                if(tmp[nx][ny] !== 0) {
-                    if(nx === 0 || nx === row-1 || ny === 0 || ny === col-1  ){
-                        ans = Math.min(ans, tmp[nx][ny])
-                    }
+                if(isExit(nx,ny)){
+                    return distance + 1 // 탈출 했다는것은 가장 BFS에서는 가장 먼저 탈출한것
                 }
                 
-                queue.push([nx,ny])
+                queue.push([nx,ny, distance+1])
             }
         }
     }
 
-    return ans === Infinity ? -1 : ans
+    return ans
 };
