@@ -40,7 +40,7 @@ var nearestExit = function(maze, entrance) {
                 maze[nx][ny] = "+"
                 
                 if(isExit(nx,ny)){
-                    return distance + 1
+                    return distance + 1 // 탈출 했다는것은 가장 BFS에서는 가장 먼저 탈출한것
                 }
                 
                 queue.push([nx,ny, distance+1])
