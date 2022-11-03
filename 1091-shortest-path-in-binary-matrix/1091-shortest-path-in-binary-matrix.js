@@ -12,7 +12,7 @@ var shortestPathBinaryMatrix = function(grid) {
         return -1;
     }
     
-    const queue = [[0,0,1]]
+    let queue = [[0,0,1]]
     grid[0][0] = -1
     
     const isValid = (x,y) => {
@@ -24,8 +24,10 @@ var shortestPathBinaryMatrix = function(grid) {
     }
     
     while(queue.length){
-        for(let i=0; i<queue.length; i++){
-            let [x, y, distance] = queue.shift()
+        const currentLength = queue.length
+        const nextQueue = []
+        for(let i=0; i<currentLength; i++){
+            let [x, y, distance] = queue[i]
             if(isEnd(x,y)) return distance
             distance++
 
@@ -34,10 +36,11 @@ var shortestPathBinaryMatrix = function(grid) {
                 const ny = y + dy
                 if(isValid(nx,ny)){
                     grid[nx][ny] = -1
-                    queue.push([nx,ny,distance])
+                    nextQueue.push([nx,ny,distance])
                 }
             }
         }
+        queue = nextQueue
     }
     
     return -1
