@@ -3,24 +3,19 @@
  * @return {number[][]}
  */
 var updateMatrix = function(mat) {
-    let valid = (row, col) => {
-        return 0 <= row && row < m && 0 <= col && col < n && mat[row][col] == 1;
+    const isValid = (x, y) => {
+        return 0 <= x && x < rows && 0 <= y && y < cols && mat[x][y] == 1;
     }
     
-    // if you don't want to modify the input, you can create a copy at the start
-    m = mat.length;
-    n = mat[0].length;
+    const rows = mat.length;
+    const cols = mat[0].length;
     let queue = [];
-    let seen = [];
-    for (let i = 0; i < m; i++) {
-        seen.push(new Array(n).fill(false));
-    }
+    const visited = Array.from(Array(rows),()=>Array(cols).fill(0))
     
-    for (let row = 0; row < m; row++) {
-        for (let col = 0; col < n; col++) {
-            if (mat[row][col] == 0) {
-                queue.push([row, col]);
-                seen[row][col] = true;
+    for (let x = 0; x < rows; x++) {
+        for (let y = 0; y < cols; y++) {
+            if (mat[x][y] == 0) {
+                queue.push([x, y]);
             }
         }
     }
@@ -34,13 +29,16 @@ var updateMatrix = function(mat) {
         steps++;
         // 그래프에서 level마다 모든 노드를 확인하는것과 동일
         for (let i = 0; i < currentLength; i++) {
-            const [row, col] = queue[i]; // shift보다 성능이 좋다, shift할 경우 배열의 인덱스 번호를 다시 재정렬해줘야함
+            // shift보다 성능이 좋다, shift할 경우 배열의 인덱스 번호를 다시 재정렬해줘야함
+            const [x, y] = queue[i]; 
+            visited[x][y] = true;
+
             for (const [dx, dy] of directions) {
-                let nextRow = row + dy, nextCol = col + dx;
-                if (valid(nextRow, nextCol) && !seen[nextRow][nextCol]) {
-                    seen[nextRow][nextCol] = true;
-                    nextQueue.push([nextRow, nextCol]);
-                    mat[nextRow][nextCol] = steps;
+                let nx = x + dy, ny = y + dx;
+                if (isValid(nx, ny) && !visited[nx][ny]) {
+                    visited[nx][ny] = true;
+                    nextQueue.push([nx, ny]);
+                    mat[nx][ny] = steps;
                 }
             }
         }
