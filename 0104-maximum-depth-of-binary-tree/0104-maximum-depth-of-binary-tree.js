@@ -11,10 +11,23 @@
  * @return {number}
  */
 var maxDepth = function(root) {
-    if(!root) return 0 
+    if(!root) return  0 
+    let ans = 0
+    const stack = [[root,1]] 
     
-    const left = maxDepth(root.left) +1 
-    const right = maxDepth(root.right) +1
-    
-    return Math.max(left, right)
+    while(stack.length){
+        let [node, depth] = stack.pop()
+        ans = Math.max(ans, depth)
+        
+        depth++
+        
+        if(node.right){
+            stack.push([node.right, depth])
+        }
+        
+        if(node.left){
+            stack.push([node.left, depth])
+        }
+    }
+    return ans    
 };
