@@ -22,7 +22,7 @@ var shortestDistance = function(grid) {
         for(let j=0; j<cols; j++){
             if(grid[i][j] === 1){
                 let queue = [[i, j, 0]]
-                minDistance = Infinity
+                minDistance = Infinity // 집을 찾을때마다 재할당해준다. 그리고 마지막에 모든 거리가 합산되거에서 최단 거리를 찾음
 
                 while(queue.length){
                     const currentLength = queue.length
