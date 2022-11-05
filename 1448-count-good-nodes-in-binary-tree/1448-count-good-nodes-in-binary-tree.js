@@ -3,22 +3,18 @@
  * @return {number}
  */
 var goodNodes = function(root) {
-    let dfs = (node, maxSoFar) => {
-        if (!node) {
-            return 0;
+    let count = 0
+    const dfs = (node, max) => {
+        if(!node) return 0 
+        
+        if(node.val >= max){
+            count++
+            max = node.val
         }
         
-    maxSoFar = Math.max(maxSoFar, node.val)
-        
-        let left = dfs(node.left, maxSoFar);
-        let right = dfs(node.right, maxSoFar);
-        let ans = left + right;
-        if (node.val >= maxSoFar) {
-            ans++;
-        }
-        
-        return ans;
+        dfs(node.left, max, count)
+        dfs(node.right, max, count)
     }
-    
-    return dfs(root, -Infinity);
+    dfs(root, -Infinity);
+    return count
 };
