@@ -12,28 +12,19 @@
  * @return {boolean}
  */
 var hasPathSum = function(root, targetSum) {
-    if(!root) return false 
-
-    const stack = [[root, 0]] 
-    
-    while(stack.length){
-        let [node, curr] = stack.pop()
+    const dfs = (node, curr) => {
+        if(!node) return false 
         
-        curr += node.val 
-        if(!node.left && !node.right){
-            if(curr === targetSum) return true
+        if(!node.left && !node.right) {
+            return (node.val += curr) === targetSum
         }
         
-        if(node.right){
-            stack.push([node.right,curr])
-        }
+        curr += node.val
         
-        if(node.left){
-            stack.push([node.left,curr])
-        }
-        
-        curr -= node.val
+        const left = dfs(node.left,curr)
+        const right = dfs(node.right,curr)
+        return left || right
     }
     
-    return false
+    return dfs(root, 0)
 };
