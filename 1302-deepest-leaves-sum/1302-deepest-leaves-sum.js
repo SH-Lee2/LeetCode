@@ -11,7 +11,6 @@
  * @return {number}
  */
 var deepestLeavesSum = function(root) {
-    // depths마다 노드 값을 저장하고 마지막 depths의 합을 반환
     if(!root) return 0
     
     let queue = [root]
