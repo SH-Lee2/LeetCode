@@ -20,9 +20,8 @@ var maxAncestorDiff = function(root) {
         min = Math.min(node.val, min)
         
         ans = Math.max(ans, Math.abs(max-min))
-        console.log(ans)
-        const left = dfs(node.left, max, min)
-        const right = dfs(node.right, max, min)
+        dfs(node.left, max, min)
+        dfs(node.right, max, min)
         
     }
     dfs(root, 0, 5000)
