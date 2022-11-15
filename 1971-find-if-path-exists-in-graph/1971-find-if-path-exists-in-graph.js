@@ -9,14 +9,17 @@ var validPath = function(n, edges, source, destination) {
     const graph = new Map()
     
     const dfs = (edge) => {
+        if(edge === destination) return true
+        
         const node = graph.get(edge)
         for(let i=0; i<node.length; i++){
             const vertex = node[i]
             if(!seen.has(vertex)){
                 seen.add(vertex)
-                dfs(vertex)
+                if(dfs(vertex)) return true
             }
         }
+        return false 
     }
     
     for(let i=0; i<n; i++){
@@ -30,6 +33,5 @@ var validPath = function(n, edges, source, destination) {
     
     const seen = new Set()
     
-    dfs(source)
-    return seen.has(destination)
+    return dfs(source)
 };
