@@ -23,8 +23,6 @@ var reachableNodes = function(n, edges, restricted) {
     let ans = 1
     
     const dfs = (node) => {
-        // if(restrict.has(node)) return  // 접근 불가 
-
         const edges = graph.get(node)
         
         for(let i=0; i<edges.length; i++){
