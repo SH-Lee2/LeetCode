@@ -6,10 +6,9 @@
  */
 var reachableNodes = function(n, edges, restricted) {
     const graph = new Map()
-    const restrict = new Set()
+    const restrict = new Set(restricted)
     const seen = new Set([0])
     
-    for(const rt of restricted) restrict.add(rt)
     
     for(let i=0; i<n; i++){
         graph.set(i,[])
