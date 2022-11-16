@@ -24,7 +24,6 @@ var reachableNodes = function(n, edges, restricted) {
     
     const dfs = (node) => {
         const edges = graph.get(node)
-        
         for(let i=0; i<edges.length; i++){
             const vertex = edges[i]
             if(restrict.has(vertex)) continue  // 접근 불가 
