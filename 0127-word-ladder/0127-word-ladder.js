@@ -28,6 +28,7 @@ var ladderLength = function(beginWord, endWord, wordList) {
             
             for(const choice of choices){
                 for(let i=0; i<word.length; i++){
+                    
                     const newWord = word.substring(0,i) + choice + word.substring(i+1)
                     if(!seen.has(newWord) && wordSet.has(newWord)){
                         seen.add(newWord)
