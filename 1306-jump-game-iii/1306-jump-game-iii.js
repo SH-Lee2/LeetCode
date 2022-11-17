@@ -18,14 +18,7 @@ var canReach = function(arr, start) {
         
         for(const [index, value] of queue){
             if(value === 0) return true 
-            
-//             for(const val of [-value , value]){
-//                 const newIdx = val+index
-//                 if(isValid(newIdx) && !seen.has(newIdx)){
-//                     seen.add(newIdx)
-//                     nextQueue.push([newIdx, arr[newIdx]])
-//                 }
-//             }
+ 
             const pre = index - value
             const next = index + value 
             
