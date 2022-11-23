@@ -9,11 +9,9 @@ var allPathsSourceTarget = function(graph) {
             ans.push([...curr])
         }
         for(const vertex of graph[node]){
-            if(!curr.includes(vertex)){
-                curr.push(vertex)
-                backtrack(curr,vertex)
-                curr.pop()
-            }
+            curr.push(vertex)
+            backtrack(curr,vertex)
+            curr.pop()
         }
     }
     let ans = []
