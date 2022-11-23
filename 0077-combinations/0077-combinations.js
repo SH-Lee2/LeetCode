@@ -10,11 +10,9 @@ var combine = function(n, k) {
             return
         }
         for(let j=i; j<=n; j++){
-            if(!curr.includes(j)){
                 curr.push(j)
-                backtrack(curr,j)
+                backtrack(curr,j+1)
                 curr.pop()
-            }
         }
         
     }
