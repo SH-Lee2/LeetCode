@@ -3,22 +3,23 @@
  * @return {number[][]}
  */
 var permute = function(nums) {
-    let backtrack = curr => {
-        if (curr.length == nums.length) {
-            ans.push([...curr]);
-            return;
+    const ans = []
+    
+    const backtrack = (curr) => {
+        if(curr.length === nums.length){
+            ans.push([...curr])
+            return
         }
         
-        for (const num of nums) {
-            if (!curr.includes(num)) {
-                curr.push(num);
-                backtrack(curr);
-                curr.pop();
+        for(const num of nums){
+            if(!curr.includes(num)){
+                curr.push(num)
+                backtrack(curr)
+                curr.pop()
             }
         }
     }
     
-    let ans = [];
-    backtrack([]);
-    return ans;
+    backtrack([])
+    return ans
 };
