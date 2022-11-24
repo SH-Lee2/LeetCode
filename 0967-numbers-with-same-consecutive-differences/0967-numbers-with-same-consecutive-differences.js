@@ -5,23 +5,21 @@
  */
 var numsSameConsecDiff = function(n, k) {
     const backtrack = (curr) => {
-        if(curr.length === n){
+        if(curr.length > 1 && Math.abs(curr[curr.length-1] - curr[curr.length-2]) !== k) return 
+        if(curr.length === n ){
             ans.push(+curr.join(''))
             return
         }
         for(let i=0; i<=9; i++){
-            if(Math.abs(curr[curr.length-1] - i) === k){
-                curr.push(i)
-                backtrack(curr)
-                curr.pop()
-            }
+            if(i===0 && curr.length === 0) continue
+            curr.push(i)
+            backtrack(curr)
+            curr.pop()
         }
     }
     
     const ans = [] 
-    for(let i=1; i<=9; i++){
-        backtrack([i])
-    }
+    backtrack([])
     
     return ans
 };
