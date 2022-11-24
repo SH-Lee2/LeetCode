@@ -5,7 +5,6 @@
  */
 var combinationSum3 = function(k, n) {
     const backtrack = (path, sum, start) => {
-        if(sum === n && path.length < k) return 
         if(sum === n && path.length === k){
             ans.push([...path])
             return
