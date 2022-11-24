@@ -7,6 +7,7 @@ var exist = function(board, word) {
     const dx = [-1,0,1,0]
     const dy = [0,1,0,-1]
     
+    /** board[x][y] 값이 맞는지 체크 */
     const isValid = (x,y) => {
         return x >= 0 && x < board.length && y >= 0 && y < board[0].length
     }
@@ -32,7 +33,8 @@ var exist = function(board, word) {
     }
     
     const start = word[0] 
-    // const seen = Array.from(Array(board.length), ()=>Array(board[0].length).fill(false))
+    
+    /** 시작하는 단어와 일치하는 좌표를 찾는다. */
     for(let i=0; i<board.length; i++){
         for(let j=0; j<board[0].length; j++){
             let seen = [];
