@@ -4,17 +4,17 @@
  * @return {number[]}
  */
 var numsSameConsecDiff = function(n, k) {
-    const backtrack = (curr) => {
-        if(curr.length > 1 && Math.abs(curr[curr.length-1] - curr[curr.length-2]) !== k) return 
-        if(curr.length === n ){
-            ans.push(+curr.join(''))
+    const backtrack = (path) => {
+        if(path.length > 1 && Math.abs(path.at(-2) - path.at(-1)) !== k) return 
+        if(path.length === n){
+            ans.push(path.join(''))
             return
         }
         for(let i=0; i<=9; i++){
-            if(i===0 && curr.length === 0) continue
-            curr.push(i)
-            backtrack(curr)
-            curr.pop()
+            if(path.length === 0 && i === 0) continue
+            path.push(i)
+            backtrack(path)
+            path.pop()
         }
     }
     
