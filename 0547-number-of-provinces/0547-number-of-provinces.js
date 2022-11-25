@@ -3,17 +3,9 @@
  * @return {number}
  */
 var findCircleNum = function(isConnected) {
-    let dfs = node => {
-        for (const neighbor of graph.get(node)) {
-            if (!seen[neighbor]) {
-                seen[neighbor] = true;
-                dfs(neighbor);
-            }
-        }
-    }
+    let graph = new Map();
     
     let len = isConnected.length;
-    let graph = new Map();
     for (let i = 0; i < len; i++) {
         graph.set(i, []);
     }
@@ -28,16 +20,25 @@ var findCircleNum = function(isConnected) {
         }
     }
     
-    let seen = new Array(len).fill(false);
-    let ans = 0;
-    
-    for (let i = 0; i < len; i++) {
-        if (!seen[i]) {
-            ans++;
-            seen[i] = true;
-            dfs(i);
+    let dfs = node => {
+        if(seen.has(node)) return 
+        seen.add(node)
+        for(const neighborhood of graph.get(node)){
+            dfs(neighborhood)
         }
     }
     
+    
+    
+    // let seen = new Array(len).fill(false);
+    let seen = new Set()
+    let ans = 0;
+    
+    for(let i=0; i<len; i++){
+        if(!seen.has(i)){
+            dfs(i)
+            ans++
+        }
+    }
     return ans;
 };
