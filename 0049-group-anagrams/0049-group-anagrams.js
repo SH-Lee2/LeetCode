@@ -3,21 +3,17 @@
  * @return {string[][]}
  */
 var groupAnagrams = function(strs) {
-    /**
-    * 각 문자 str을 정렬한 값을 key 값으로 str들을 저장한다.
-    */
-    
     const map = new Map()
     
-    for(const str of strs){
+    strs.forEach(str=>{
         const key = str.split('').sort().join('')
-        map.has(key) ? map.get(key).push(str) : map.set(key,[str])
-    }
+        if(!map.has(key)) map.set(key,[])
+        map.get(key).push(str)
+    })
     
     const ans = [] 
-
-    for(const value of map.values()){
-        ans.push(value)
+    for(const values of map.values()){
+        ans.push(values)
     }
     
     return ans
