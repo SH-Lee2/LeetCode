@@ -28,9 +28,6 @@ var findCircleNum = function(isConnected) {
         }
     }
     
-    
-    
-    // let seen = new Array(len).fill(false);
     let seen = new Set()
     let ans = 0;
     
