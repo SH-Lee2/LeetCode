@@ -1,43 +1,33 @@
+class RandomizedSet {
+  constructor() {
+    this.map = new Map();
+    this.list = [];
+  }
 
-var RandomizedSet = function() {
-    this.map = new Set()
-};
+  insert(val) {
+    if (this.map.has(val)) return false;
+    this.map.set(val, this.list.length);
+    this.list.push(val);
+    return true;
+  }
 
-/** 
- * @param {number} val
- * @return {boolean}
- */
-RandomizedSet.prototype.insert = function(val) {
-    if(this.map.has(val)) return false 
-    this.map.add(val)
-    return true
-};
+  remove(val) {
+    if (!this.map.has(val)) return false;
+    const idx = this.map.get(val);
+    this._swap(idx, this.list.length - 1);
+    this.list.pop();
+    this.map.set(this.list[idx], idx);
+    this.map.delete(val);
+    return true;
+  }
 
-/** 
- * @param {number} val
- * @return {boolean}
- */
-RandomizedSet.prototype.remove = function(val) {
-    if(this.map.has(val)) {
-        this.map.delete(val)
-        return true
-    }
-    return false 
-};
+  getRandom() {
+    return this.list[Math.floor(Math.random() * this.list.length)];
+  }
 
-/**
- * @return {number}
- */
-RandomizedSet.prototype.getRandom = function() {
-    const size = this.map.size 
-    const tmp = [...this.map]
-    return tmp[Math.floor(Math.random() * size)]
-};
-
-/** 
- * Your RandomizedSet object will be instantiated and called as such:
- * var obj = new RandomizedSet()
- * var param_1 = obj.insert(val)
- * var param_2 = obj.remove(val)
- * var param_3 = obj.getRandom()
- */
+  _swap(a, b) {
+    const tmp = this.list[a];
+    this.list[a] = this.list[b];
+    this.list[b] = tmp;
+  }
+}
