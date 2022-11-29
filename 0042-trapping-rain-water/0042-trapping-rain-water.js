@@ -11,8 +11,11 @@ var trap = function(height) {
         leftMax = Math.max(leftMax, height[left])
         rightMax = Math.max(rightMax, height[right])
         
-        ans+= leftMax - height[left] > 0 ? leftMax - height[left] : 0
-        ans+= rightMax - height[right] > 0 ? rightMax - height[right] : 0
+        const leftRain = leftMax - height[left]
+        const rightRain = rightMax - height[right]
+        
+        ans+= leftRain > 0 ? leftRain : 0
+        ans+= rightRain > 0 ? rightRain : 0
         
         
         height[left] > height[right] ? right-- : left++
