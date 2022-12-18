@@ -3,18 +3,17 @@
  * @return {number[]}
  */
 var dailyTemperatures = function(temperatures) {
+    // 모노토닉
     const stack = [] 
-    const answer = Array.from({length: temperatures.length}, () => 0)
+    const ans = new Array(temperatures.length).fill(0)
     
-    for(let curDay=0; curDay<temperatures.length; curDay++){
-        while(stack.length && temperatures[stack[stack.length-1]] < temperatures[curDay]){
-            const preDay = stack.pop()
-            
-            answer[preDay] = curDay - preDay
+    for(let i=0; i<temperatures.length; i++){
+        while(stack.length && temperatures[stack[stack.length-1]] < temperatures[i]){
+            const day = stack.pop()
+            ans[day] = i - day 
         }
-        
-        stack.push(curDay)
+        stack.push(i)
     }
     
-    return answer 
+    return ans
 };
