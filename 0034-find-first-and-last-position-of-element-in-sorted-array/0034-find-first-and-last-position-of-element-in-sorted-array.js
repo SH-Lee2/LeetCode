@@ -10,16 +10,14 @@ var searchRange = function(nums, target) {
     for(let i=0; i<nums.length; i++){
         if(nums[i] === target){
             left = i
-            break
-        }
-    }
-    
-     for(let i=nums.length-1; i>=left; i--){
-        if(nums[i] === target){
             right = i
+            while(nums[right+1] === target){
+                right++
+            }
             break
         }
     }
+   
     
     return [left, right]
     
