@@ -18,7 +18,6 @@ var floodFill = function(image, sr, sc, color) {
     
     let queue = [[sr,sc]]
     image[sr][sc] = color
-    
     while(queue.length){
         const nextQueue = [] 
         for(const [x,y] of queue){
