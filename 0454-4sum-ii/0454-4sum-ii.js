@@ -15,6 +15,7 @@ var fourSumCount = function(nums1, nums2, nums3, nums4) {
            res.set(key, (res.get(key)||0)+1); 
         }
     }
+    console.log(res)
     
     let total = 0;
     
