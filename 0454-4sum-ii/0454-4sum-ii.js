@@ -6,29 +6,24 @@
  * @return {number}
  */
 var fourSumCount = function(nums1, nums2, nums3, nums4) {
-    const sumTwoList = function(x,y){
-        const len = x.length 
-        const res = new Map()
-        
-        for(let i=0; i<len; i++){
-            for(let j=0; j<len; j++){
-               const key = x[i] + y[j];
-               res.set(key, (res.get(key)||0)+1); 
-            }
+    const res = new Map()
+    const len = nums1.length 
+
+    for(let i=0; i<len; i++){
+        for(let j=0; j<len; j++){
+           const key = nums1[i] + nums2[j];
+           res.set(key, (res.get(key)||0)+1); 
         }
-        
-        return res
     }
     
-    const sum1 = sumTwoList(nums1,nums2); // i + j
-    const sum2 = sumTwoList(nums3,nums4); // k + l
     let total = 0;
     
-    sum1.forEach((value,key) =>{
-        let offset = 0 - key;
-        if(sum2.has(offset)){
-            total += (sum2.get(offset) * sum1.get(key));
+    for(let i=0; i<len; i++){
+        for(let j=0; j<len; j++){
+            total += res.get(-1 * (nums3[i]+nums4[j]))|| 0                  
         }
-    })
+    }
+    
+    
     return total;
 };
