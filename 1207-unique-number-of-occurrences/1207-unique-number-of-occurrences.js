@@ -4,10 +4,8 @@
  */
 var uniqueOccurrences = function(arr) {
     const map = new Map()
+    arr.forEach(num => map.set(num, (map.get(num)||0)+1))
     
-    arr.forEach(num=>map.set(num, (map.get(num)||0)+1))
-    
-    const values = new Set(map.values())
-    
-    return map.size === values.size
+    const values = [...map.values()]
+    return new Set(values).size === values.length
 };
