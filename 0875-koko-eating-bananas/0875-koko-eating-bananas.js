@@ -4,8 +4,6 @@
  * @return {number}
  */
 var minEatingSpeed = function(piles, h) {
-    const len = piles.length 
-
     let min = 1, max = Math.max(...piles)
     
     while(min <=max){
