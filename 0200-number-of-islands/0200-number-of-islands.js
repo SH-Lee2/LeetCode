@@ -34,12 +34,13 @@ var numIslands = function(grid) {
             const nextQueue = []
 
             for(const [x,y] of queue){
-                if(!isValid(x,y)) continue
-                grid[x][y] = '0'
                 for(const [dx, dy] of directions){
                     const nx = x + dx
                     const ny = y + dy
-                    nextQueue.push([nx,ny])
+                    if(isValid(nx,ny)){
+                        nextQueue.push([nx,ny])
+                        grid[nx][ny] = '0'
+                    }
                 }
             }
 
@@ -51,6 +52,7 @@ var numIslands = function(grid) {
         for(let j=0; j<grid[0].length; j++){
             if(grid[i][j] === "1"){
                 count++
+                grid[i][j] = '0'
                 BFS(i,j)
             }
         }
