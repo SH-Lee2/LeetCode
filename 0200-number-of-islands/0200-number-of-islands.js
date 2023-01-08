@@ -30,30 +30,33 @@ var numIslands = function(grid) {
     }
     const directions = [[-1,0],[0,1],[1,0],[0,-1]]
     
-     for(let i=0; i<grid.length; i++){
+    const BFS = (i,j) => {
+        let queue = [[i,j]]
+
+        while(queue.length){
+            const nextQueue = []
+
+            for(const [x,y] of queue){
+                if(isValid(x,y)) continue
+                grid[x][y] = '0'
+                for(const [dx, dy] of directions){
+                    const nx = x + dx
+                    const ny = y + dy
+                    nextQueue.push([nx,ny])
+                }
+            }
+
+            queue = nextQueue
+        }
+    }
+    
+    for(let i=0; i<grid.length; i++){
         for(let j=0; j<grid[0].length; j++){
             if(grid[i][j] === "1"){
                 count++
-                let queue = [[i,j]]
-                
-                while(queue.length){
-                    const nextQueue = []
-                    
-                    for(const [x,y] of queue){
-                        if(isValid(x,y)) continue
-                        grid[x][y] = '0'
-                        for(const [dx, dy] of directions){
-                            const nx = x + dx
-                            const ny = y + dy
-                            nextQueue.push([nx,ny])
-                        }
-                    }
-                    
-                    queue = nextQueue
-                }
+                BFS(i,j)
             }
         }
     }
-    console.log(grid)
     return count
 };
