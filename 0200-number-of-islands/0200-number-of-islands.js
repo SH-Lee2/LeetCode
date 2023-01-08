@@ -38,8 +38,8 @@ var numIslands = function(grid) {
                     const nx = x + dx
                     const ny = y + dy
                     if(isValid(nx,ny)){
-                        nextQueue.push([nx,ny])
                         grid[nx][ny] = '0'
+                        nextQueue.push([nx,ny])
                     }
                 }
             }
