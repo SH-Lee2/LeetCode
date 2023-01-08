@@ -4,23 +4,18 @@
  * @return {string}
  */
 var gcdOfStrings = function(str1, str2) {
-//     let prefix = ''
-//     let ans = ''
+    let prefix = ''
+    let ans = ''
     
-//     for(const char of str2){
-//         prefix += char 
-//         if(str1.replaceAll(prefix,'') === '' && str2.replaceAll(prefix, '') === ''){
-//             ans = prefix.length > ans.length ? prefix : ans 
-//         } 
-//     }
+    const minStr = str1.length> str2.length ? str2 : str1
+    const maxStr = str1.length > str2.length ? str1 : str2
     
-//     return ans 
-    const [smallerString, largerString] = [str1, str2].sort((a,b) => a.length - b.length);
-    for (let i = smallerString.length; i > 0; i--) {
-        const testString = smallerString.slice(0, i);
-        const correctSmaller = !smallerString.split(testString).join('').length;
-        const correctLarger = !largerString.split(testString).join('').length;
-        if (correctSmaller && correctLarger) return testString;
+    for(const char of minStr){
+        prefix += char 
+        if(maxStr.replaceAll(prefix,'') === '' && minStr.replaceAll(prefix, '') === ''){
+            ans = prefix.length > ans.length ? prefix : ans 
+        } 
     }
-    return '';
+    
+    return ans 
 };
