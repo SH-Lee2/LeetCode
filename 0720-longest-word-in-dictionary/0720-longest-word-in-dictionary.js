@@ -3,7 +3,6 @@
  * @return {string}
  */
 
-
 var longestWord = function(words) {
     words.sort()
     
@@ -14,8 +13,8 @@ var longestWord = function(words) {
         let key = '' 
         let isValid = true
         
-        for(let i=0; i<word.length; i++){
-            key += word[i]
+        for(const char of word){
+            key += char
             if(!wordList.has(key)){
                 isValid = false 
                 break
