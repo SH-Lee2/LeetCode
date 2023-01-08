@@ -3,28 +3,57 @@
  * @return {number}
  */
 var numIslands = function(grid) {
-    const rows = grid.length
-    const cols = grid[0].length
+    // const isValid = (x,y) => {
+    //     return x>=0 && y>=0 && x<grid.length && y< grid[0].length && grid[x][y]==="1"
+    // }
+    // function DFS(x,y){
+    //     if(isValid(x,y)){
+    //         grid[x][y] = 0
+    //         return DFS(x-1,y) ||  DFS(x,y+1) || DFS(x+1,y) || DFS(x,y-1)
+    //     }
+    // }
+    // let count = 0 
+    // for(let i=0; i<grid.length; i++){
+    //     for(let j=0; j<grid[0].length; j++){
+    //         if(grid[i][j] === "1"){
+    //             count++
+    //             DFS(i,j)
+    //         }
+    //     }
+    // }
+    // return count
     
-    const dfs = (x,y) => {
-        if(x>=rows || x < 0 || y>=cols || y < 0 || grid[x][y] !== "1") return 
-        
-        grid[x][y] = '0'
-        
-        return dfs(x-1,y) || dfs(x,y+1) || dfs(x+1,y) || dfs(x,y-1)
+    let count = 0 
+    
+    const isValid = (x,y) => {
+        return x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] === '0' 
     }
+    const directions = [[-1,0],[0,1],[1,0],[0,-1]]
     
-    let islands = 0
-    
-    for(let i=0; i<rows; i++){
-        for(let j=0; j<cols; j++){
-            // 섬 찾음
-            if(grid[i][j] === '1'){
-                dfs(i,j)
-                islands++
-            } 
+     for(let i=0; i<grid.length; i++){
+        for(let j=0; j<grid[0].length; j++){
+            if(grid[i][j] === "1"){
+                count++
+                let queue = [[i,j]]
+                
+                while(queue.length){
+                    const nextQueue = []
+                    
+                    for(const [x,y] of queue){
+                        if(isValid(x,y)) continue
+                        grid[x][y] = '0'
+                        for(const [dx, dy] of directions){
+                            const nx = x + dx
+                            const ny = y + dy
+                            nextQueue.push([nx,ny])
+                        }
+                    }
+                    
+                    queue = nextQueue
+                }
+            }
         }
     }
-
-    return islands
+    console.log(grid)
+    return count
 };
