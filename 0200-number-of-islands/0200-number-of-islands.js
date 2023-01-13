@@ -52,7 +52,7 @@ var numIslands = function(grid) {
         for(let j=0; j<grid[0].length; j++){
             if(grid[i][j] === "1"){
                 count++
-                grid[i][j] = '0'
+                // grid[i][j] = '0'
                 BFS(i,j)
             }
         }
