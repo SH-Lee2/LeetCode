@@ -1,20 +1,27 @@
 /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
  * @param {TreeNode} root
  * @return {number}
  */
 var goodNodes = function(root) {
-    let count = 0
+    let ans = 0
     const dfs = (node, max) => {
-        if(!node) return 0 
-        
-        if(node.val >= max){
-            count++
-            max = node.val
+        if(!node) return 
+        if(max <= node.val){
+            ans++
         }
-        
-        dfs(node.left, max, count)
-        dfs(node.right, max, count)
+        max = Math.max(max, node.val)
+        dfs(node.left, max)
+        dfs(node.right, max)
     }
-    dfs(root, -Infinity);
-    return count
+    
+    dfs(root,root.val)
+    return ans
 };
