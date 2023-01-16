@@ -11,17 +11,21 @@
  * @return {number}
  */
 var goodNodes = function(root) {
-    let ans = 0
     const dfs = (node, max) => {
-        if(!node) return 
-        if(max <= node.val){
-            ans++
-        }
+        if(!node) return 0
+        
         max = Math.max(max, node.val)
-        dfs(node.left, max)
-        dfs(node.right, max)
+        
+        const left = dfs(node.left, max)
+        const right = dfs(node.right, max)
+        let ans = left + right;
+        
+        if (node.val >= max) {
+            ans++;
+        }
+        
+        return ans
     }
     
-    dfs(root,root.val)
-    return ans
+    return dfs(root,root.val)
 };
