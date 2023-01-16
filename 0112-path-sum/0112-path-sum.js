@@ -13,18 +13,18 @@
  */
 var hasPathSum = function(root, targetSum) {
     const dfs = (node, curr) => {
-        if(!node) return false 
-        
-        if(!node.left && !node.right) {
-            return (node.val += curr) === targetSum
-        }
+        if(!node) return false
         
         curr += node.val
         
-        const left = dfs(node.left,curr)
-        const right = dfs(node.right,curr)
+        if(!node.left && !node.right){
+            return curr === targetSum
+        }
+        
+        const left = dfs(node.left, curr)
+        const right = dfs(node.right, curr)
+        
         return left || right
     }
-    
     return dfs(root, 0)
 };
