@@ -11,31 +11,13 @@
  * @return {number}
  */
 var minDepth = function(root) {
-    if(!root) return 0 
-    
-    const isLeaf = (node) => {
-        return node.left === null && node.right === null
-    }
-    if(isLeaf(root)) return 1
-    let queue = [root]
-    let depth = 1
-    
-    while(queue.length){
-        const currLength = queue.length
-        const nextQueue = [] 
+    const dfs = (node) => {
+        if(!node) return 0
+        if(!node.left) return dfs(node.right)+1
+        if(!node.right) return dfs(node.left)+1
         
-        for(let i=0; i<currLength; i++){
-            const node = queue[i]
-            
-            if(isLeaf(node)) return depth
-            if(node.left) nextQueue.push(node.left)
-            if(node.right) nextQueue.push(node.right)
-            
-        }
-        
-        depth++
-        queue = nextQueue
+        return Math.min(dfs(node.left), dfs(node.right))+1
     }
-
-    return depth
+    
+    return dfs(root)
 };
