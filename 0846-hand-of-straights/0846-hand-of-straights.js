@@ -11,7 +11,7 @@ var isNStraightHand = function(hand, groupSize) {
     hand.forEach(num => map.set(num, (map.get(num)||0)+1))
 
     hand.sort((a,b) => a-b)
-    console.log(hand)
+
     for(const num of hand){
         if(!map.has(num)) continue
 
