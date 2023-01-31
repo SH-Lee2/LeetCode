@@ -12,11 +12,8 @@ var minimumDeletions = function(nums) {
     const right = Math.max(minIdx, maxIdx)
     
     // case 1 : 앞에서 부터 삭제 right + 1
-    
     // case 2 : 뒤에서 부터 삭제 len - left
-
     // case 3 : 앞 뒤에서 부터 삭제  (left + 1) + (len - right)
-    
     return Math.min(right + 1, len - left, left + 1 + len - right)
 };
 
