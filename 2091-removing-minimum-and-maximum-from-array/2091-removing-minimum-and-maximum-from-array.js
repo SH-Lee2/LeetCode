@@ -5,28 +5,28 @@
 var minimumDeletions = function(nums) {
     if(nums.length===1) return 1
     
-    const maximumIdx = findMaximumIdx(nums)
-    const minimumIdx = findMinimumIdx(nums)
+    const [minIdx, maxIdx] = findMinIdxAndMaxId(nums)
     
-    const left = Math.min(maximumIdx, minimumIdx)
-    const right = Math.max(maximumIdx, minimumIdx)
+    const len = nums.length
+    const left = Math.min(minIdx, maxIdx)
+    const right = Math.max(minIdx, maxIdx)
     
-//     // case 1 : 앞에서 부터 삭제
-//     const case1 = right + 1
+    // case 1 : 앞에서 부터 삭제 right + 1
     
-//     // case 2 : 뒤에서 부터 삭제
-//     const case2 = nums.length - left
+    // case 2 : 뒤에서 부터 삭제 len - left
+
+    // case 3 : 앞 뒤에서 부터 삭제  (left + 1) + (len - right)
     
-//     // case 3 : 앞 뒤에서 부터 삭제  
-//     const case3 = (left + 1) + (nums.length - right)
-    
-    return Math.min(right + 1, nums.length - left, left + 1 + nums.length - right)
+    return Math.min(right + 1, len - left, left + 1 + len - right)
 };
 
-function findMaximumIdx(nums) {
-    return nums.indexOf(Math.max(...nums))
-}
-
-function findMinimumIdx(nums) {
-    return nums.indexOf(Math.min(...nums))
+function findMinIdxAndMaxId(nums) {
+    let minIdx = 0, maxIdx = 0 
+    
+    for(let i=0; i<nums.length;i++){
+        if(nums[i] < nums[minIdx]) minIdx = i
+        if(nums[i] > nums[maxIdx]) maxIdx = i
+    }
+    
+    return [minIdx, maxIdx]
 }
