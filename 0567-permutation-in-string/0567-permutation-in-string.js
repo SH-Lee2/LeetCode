@@ -12,9 +12,8 @@ var checkInclusion = function(s1, s2) {
         map.set(char, (map.get(char)||0)+1)
     }
     
-    let left = 0, //left pointer/index of the sliding window
-		right = 0, //right pointer/index of the sliding window
-		requiredLength = s1.length //length of the substring required in s2
+    let left = 0, right=0, 
+        requiredLength = s1.length //length of the substring required in s2
 
 	while (right < s2.length) {
 		if (map.get(s2[right])> 0) requiredLength--;
@@ -29,7 +28,7 @@ var checkInclusion = function(s1, s2) {
             map.set(s2[left], map.get(s2[left]) + 1)
 			left++
 		}
-	}
-
-    return false;
+    
+    }
+    return false
 };
