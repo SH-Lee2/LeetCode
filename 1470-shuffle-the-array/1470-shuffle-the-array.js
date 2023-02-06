@@ -4,15 +4,9 @@
  * @return {number[]}
  */
 var shuffle = function(nums, n) {
-    let left = 0 
-    let right = n
-    
-    const ans = []
-    
-    for(let i=left; i<n;i++){
-        ans.push(nums[left++])
-        ans.push(nums[right++])
+    let answer = []
+    for(let i = 0; i<n; i++){
+        answer.push(nums[i],nums[i+n])
     }
-    
-    return ans
+    return answer 
 };
