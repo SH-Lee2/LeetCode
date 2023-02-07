@@ -22,11 +22,13 @@ var totalFruit = function(fruits) {
     
     const basket = new Map()
     let left = 0, right;
+    let max = 0 
     
     for(right=0; right < fruits.length; right++){
         basket.set(fruits[right], (basket.get(fruits[right])||0)+1)
         
-        if(basket.size > 2){
+        // type이 2개 이상이면 2개가 될때까지 지워준다.
+        while(basket.size > 2){
             basket.set(fruits[left], basket.get(fruits[left]) - 1)
             
             if(basket.get(fruits[left]) === 0){
@@ -34,7 +36,9 @@ var totalFruit = function(fruits) {
             }
             left++
         }
+        
+        max = Math.max(max, right - left + 1)
     }
     
-    return right - left
+    return max
 };
