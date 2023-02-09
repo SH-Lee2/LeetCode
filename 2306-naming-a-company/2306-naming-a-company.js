@@ -3,10 +3,6 @@
  * @return {number}
  */
 var distinctNames = function(ideas) {
-    // ideas에서 두개의 고유한 ideaA, ideaB를 찾는다
-    // ideaA, ideaB의 첫번째 문자를 각각 교환 -> 각각 ideas에 없어야한다.
-    // 이때 생성된 문자열 (공백으로 구분된 문자열)이 ideas에 없으면 회사이름으로 인정
-    
     const map = new Map()
     
     for(const idea of ideas) {
@@ -29,6 +25,7 @@ var distinctNames = function(ideas) {
             let sameCount = 0
             
             for(const suffix of frist){
+                // c : offee, t:offee 중복은 스왑을해도 사용불가능함
                 if(second.has(suffix)) sameCount++
             }
             
@@ -38,10 +35,6 @@ var distinctNames = function(ideas) {
    
     return count
 };
-
-// coffee, toffee
-// donuts,
-// time 
 
 // c : offee
 // t : offee, ime
