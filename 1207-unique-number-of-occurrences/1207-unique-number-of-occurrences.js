@@ -3,9 +3,14 @@
  * @return {boolean}
  */
 var uniqueOccurrences = function(arr) {
-    const map = new Map()
-    arr.forEach(num => map.set(num, (map.get(num)||0)+1))
+  const map = new Map(), occSet = new Set()
+  arr.forEach(v => map.set(v, (map.get(v)||0)+1))
     
-    const values = [...map.values()]
-    return new Set(values).size === values.length
+  for(const value of map.values()){
+      if(occSet.has(value)) return false 
+      
+      occSet.add(value)
+  }
+    
+  return true
 };
