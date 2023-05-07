@@ -5,15 +5,9 @@
 var createCounter = function(init) {
     let cur = init;
     return {
-       increment : ()=>{
-           return ++cur
-        },
-        decrement: ()=>{
-            return --cur
-        },
-            reset: ()=>{
-               return  cur = init 
-            }
+       increment : ()=> ++cur,
+       decrement: ()=> --cur,
+       reset: ()=> cur = init 
    }
     
    
