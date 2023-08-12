@@ -9,11 +9,13 @@ var getAverages = function(nums, k) {
     // sliding window + prefix sum ?? 
     const len = nums.length
     const ans = Array.from({length: len},()=>-1), prefix = [0, nums[0]]
+    const divisor = k*2+1
+
+    if(divisor > len) return ans
 
     for(let i=1; i<len; i++){
         prefix.push(nums[i] + prefix[i])
     }
-    const divisor = k*2+1
 
     for(let i=0; i<len; i++){
         if(i < k || i+k > len-1) {
