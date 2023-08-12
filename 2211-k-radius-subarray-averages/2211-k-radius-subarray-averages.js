@@ -17,11 +17,7 @@ var getAverages = function(nums, k) {
         prefix.push(nums[i] + prefix[i])
     }
 
-    for(let i=0; i<len; i++){
-        if(i < k || i+k > len-1) {
-            continue
-        }
-        
+    for(let i=k; i<len-k; i++){
         const avg = Math.floor((prefix[i+k+1] - prefix[i-k])/divisor)
         ans[i] = avg
     }
