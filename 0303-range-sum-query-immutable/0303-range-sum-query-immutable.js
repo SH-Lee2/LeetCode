@@ -2,15 +2,16 @@
  * @param {number[]} nums
  */
 var NumArray = function(nums) {
-    this.prefix = [0] 
-    for(let i=0; i<nums.length; i++){
-        if(i===0){
-            this.prefix[0] = nums[i]
-            continue
-        }
-        this.prefix.push(this.prefix.at(-1) + nums[i])
+    this.prefix = [0, nums[0]]
+
+    for(let i=1; i<nums.length; i++){
+        this.prefix.push(this.prefix[i] + nums[i])
     }
+
+    console.log(this.prefix)
 };
+
+// 0 -2 -2 1 -4 -2 -3
 
 /** 
  * @param {number} left 
@@ -18,8 +19,7 @@ var NumArray = function(nums) {
  * @return {number}
  */
 NumArray.prototype.sumRange = function(left, right) {
-    if(left === 0) return this.prefix[right]
-    return this.prefix[right] - this.prefix[left-1]    
+    return this.prefix[right+1] - this.prefix[left]
 };
 
 /** 
