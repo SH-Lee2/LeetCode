@@ -3,12 +3,14 @@
  * @return {number}
  */
 var pivotIndex = function(nums) {
-    //  pivotIndex = 왼쪽에 있는 모든 합과 오른쪽에 있는 모든합의 값이 같은것 
-    const totalSum = nums.reduce((a,b)=>a+b, 0)
-    let prefix = 0 
-    for(let i=0; i<nums.length; i++){
-        if(prefix === (totalSum - prefix - nums[i])) return i
-        prefix += nums[i]
+    // total 값을 구한다.
+    let total = nums.reduce((a,b)=> a+b,0), leftSum = 0 
+
+    // 왼쪽부터 값을 차례대로 제거하고 왼쪽 값을 더한 값과 total 값을 비교한다.
+    for(let left=0; left<nums.length; left++){
+        if(leftSum === total - leftSum - nums[left]) return left
+        leftSum += nums[left]
     }
+
     return -1
 };
