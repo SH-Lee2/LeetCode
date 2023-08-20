@@ -13,18 +13,17 @@ var maximumSum = function(nums) {
     for(const num of nums){
         const key = num.toString().split('').reduce((a,b)=> +a + +b,'')
         
-        if(!dic.has(key)) dic.set(key, [num])
+        if(!dic.has(key)) dic.set(key, num)
         else {
-            // key가 있는 경우 value 업데이트
-            // dic.get(key).push(num)
+            // key가 있는 경우 value,ans 업데이트
             const value = dic.get(key)
 
-            if(value[0] < num) {
-                ans = Math.max(ans,value.pop() + num)
-                value.push(num)
-            }else{
-                ans = Math.max(ans, value[0] + num)
+            // 둘 중 큰 값만 필요함 
+            if(value < num) {
+                dic.set(key, num)
             }
+            
+            ans = Math.max(ans, value + num)
         }
     }
 
