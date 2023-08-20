@@ -15,12 +15,19 @@ var maximumSum = function(nums) {
         
         if(!dic.has(key)) dic.set(key, [num])
         else {
-            // key가 있는 경우 value, ans 업데이트
-            const values = dic.get(key)
-            values.forEach(value => ans = Math.max(ans, value + num))
-            values.push(num)
+            // key가 있는 경우 value 업데이트
+            dic.get(key).push(num)
         }
     }
     
+    for(const values of dic.values()){
+        if(values.length === 1) continue
+
+        // 내림차순 정렬
+        values.sort((a,b)=>b-a)
+
+        ans = Math.max(ans, values[0] + values[1])
+    }
+
     return ans 
 };
