@@ -6,18 +6,24 @@ var maximumSum = function(nums) {
     const dic = new Map()
     let ans = -1
 
-    for(const num of nums){
-        const key = num.toString().split('').reduce((a,b)=> +a + +b,'')
-        
-        if(!dic.has(key)) dic.set(key, num)
+    for(let num of nums){
+        let key = 0
+        const originNum = num
+
+        while (num > 0) {
+            key += num % 10;
+            num = Math.floor(num / 10);
+        }
+
+        if(!dic.has(key)) dic.set(key, originNum)
         else {
             const value = dic.get(key)
 
-            if(value < num) {
-                dic.set(key, num)
+            if(value < originNum) {
+                dic.set(key, originNum)
             }
 
-            ans = Math.max(ans, value + num)
+            ans = Math.max(ans, value + originNum)
         }
     }
 
