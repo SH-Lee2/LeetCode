@@ -3,13 +3,18 @@
  * @return {number}
  */
 var equalPairs = function(grid) {
-    // 각 행과 열의 숫자가 동일한 경우 카운팅 , 이때 정렬 순서도 같아야 함 
+    // 각 행과 열의 숫자가 동일한 경우 카운팅 , 이때 정렬 순서도 같아야 함
+
+    // [11,1],[1,11] 같은 경우가 있기 때문에 ',' 추가 해야 분별력이 생김 
+    const convertToKey = nums => {
+        return nums.join(',')
+    }
 
     const dic = new Map()
 
     // 각 행 dic에 저장
     for(const row of grid){
-        const key = row.join('0')
+        const key = convertToKey(row)
         dic.set(key, (dic.get(key)||0)+1)
     }
 
@@ -17,13 +22,12 @@ var equalPairs = function(grid) {
 
     // 각 열 dic에서 찾아서 있다면 ans 에 value 더하기
     for(let col=0; col<grid.length; col++){
-        let key = ''
+        const keyArr = []
         for(let row=0; row<grid[0].length; row++){
-            if(row !== 0) key += '0' + grid[row][col]
-            else key += grid[row][col]
+            keyArr.push(grid[row][col])
         }
-        console.log(key)
-        ans += dic.get(key) || 0
+        
+        ans += dic.get(convertToKey(keyArr)) || 0
     }
 
     return ans
