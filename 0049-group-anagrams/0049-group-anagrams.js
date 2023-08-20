@@ -21,10 +21,5 @@ var groupAnagrams = function(strs) {
         }
     }
 
-    const ans = [] 
-    for(const value of dic.values()){
-        ans.push(value)
-    }
-
-    return ans
+    return [...dic.values()]
 };
