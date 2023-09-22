@@ -1,23 +1,28 @@
-
-const CONFIG = {
-    "N": [0, -1],
-    'S': [0, 1],
-    'E': [1, 0],
-    'W': [-1, 0],
-}
-
+/**
+ * @param {string} path
+ * @return {boolean}
+ */
 var isPathCrossing = function(path) {
-    const hashmap = new Map();
-    const currentPos = [0, 0];
-    hashmap.set(String(currentPos), 1);
-    
-    for (let i = 0; i < path.length; i++) {
-        currentPos[0] += CONFIG[path[i]][0];
-        currentPos[1] += CONFIG[path[i]][1];
-        
-        if (hashmap.has(String(currentPos))) return true;
-        hashmap.set(String(currentPos), 1);
-    }
-    
-    return false;
+    const directions = path.split("")
+    let currentPath = [0,0]
+    const map = new Map()
+    map.set(currentPath.toString(), false)
+
+    for(const direction of directions){
+        currentPath = move(currentPath, direction)
+        if(map.has(currentPath.toString())) return true
+        else map.set(currentPath.toString())
+    }  
+
+    return false
 };
+
+function move (currentPath,direction){
+    const [x,y] = currentPath
+    switch(direction){
+        case 'N' : return [x,y-1]
+        case 'E' : return [x+1,y]
+        case 'S' : return [x, y+1]
+        case 'W' : return [x-1,y]
+    }
+}
