@@ -10,16 +10,16 @@ var maximumUniqueSubarray = function(nums) {
     for(let right=0; right<nums.length; right++){
         const key = nums[right]
 
+        currentValue += key
+        map.set(key,(map.get(key)||0)+1)
 
-        while(map.has(key)){
+        while(map.get(key) > 1){
             const preKey = nums[left]
-            map.delete(preKey)
+            map.set(preKey, map.get(preKey)-1)
             currentValue -= preKey
             left++
         }
         
-        currentValue += key
-        map.set(key,1)
         max = Math.max(max, currentValue)
     }
 
