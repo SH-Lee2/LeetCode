@@ -20,17 +20,15 @@ var checkInclusion = function(s1, s2) {
 
 			map.set(char,map.get(char)-1)
 
-			
-
 			if(i > len){
 				const preChar = s2[i-len-1]
-				console.log(preChar)
 				if(map.get(preChar) >=0){
 					requiredLength++
 				}
 				map.set(preChar,map.get(preChar)+1)
 			}
-// s1이 s2 순열에 포함하는 조건 만족
+			
+			// s1이 s2 순열에 포함하는 조건 만족
 			if(requiredLength === 0) return true
 		}
 	return false;
