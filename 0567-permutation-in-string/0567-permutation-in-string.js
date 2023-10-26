@@ -9,27 +9,29 @@ var checkInclusion = function(s1, s2) {
     const map = new Map()
     s1.split("").forEach(s=>map.set(s, (map.get(s)||0)+1))
 
-    let left = 0, 
-		right = 0, 
-		requiredLength = s1.length
+		let requiredLength = s1.length, len = s1.length-1
 
-		while (right < s2.length) {
-		if (map.get(s2[right]) > 0) {
-			requiredLength--
-		}
-		map.set(s2[right], map.get(s2[right])-1)
-
-		right++ 
-
-		if (requiredLength === 0) return true;
-
-		if (right - left === s1.length) {
-			if (map.get(s2[left]) >= 0) {
-				requiredLength++;
+		for(let i=0; i<s2.length; i++){
+			const char = s2[i]
+			
+			if(map.get(char) > 0){
+				requiredLength--
 			}
-        map.set(s2[left], map.get(s2[left])+1)
-        left++
+
+			map.set(char,map.get(char)-1)
+
+			
+
+			if(i > len){
+				const preChar = s2[i-len-1]
+				console.log(preChar)
+				if(map.get(preChar) >=0){
+					requiredLength++
+				}
+				map.set(preChar,map.get(preChar)+1)
+			}
+// s1이 s2 순열에 포함하는 조건 만족
+			if(requiredLength === 0) return true
 		}
-	}
 	return false;
 };
