@@ -4,16 +4,15 @@
  * @return {number}
  */
 var numSubarraysWithSum = function(nums, goal) {
-   let totalSubarray = 0;
+   let counts = new Map();
+    counts.set(0, 1);
+    let ans = 0, curr = 0;
 
-    for(let i=0; i<nums.length; i++){
-        let sum = 0;
-        for(let j=i; j < nums.length; j++){
-            sum += nums[j]
-            if(sum === goal) totalSubarray++
-            if(sum > goal) break
-        }
+    for (const num of nums) {
+        curr += num;
+        ans += counts.get(curr - goal) || 0;
+        counts.set(curr, (counts.get(curr) || 0) + 1);
     }
 
-    return totalSubarray
+    return ans;
 };
