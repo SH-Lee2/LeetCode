@@ -4,20 +4,21 @@
  * @return {number[]}
  */
 var nextGreaterElement = function(nums1, nums2) {
-    const stack = [] 
     const map = new Map()
-    
+    const stack = []
     for(let i=0; i<nums2.length; i++){
-        while(stack && nums2[stack[stack.length-1]] < nums2[i]){
-            map.set(nums2[stack.pop()], nums2[i])
+        while(stack.length && stack.at(-1) < nums2[i]) {
+            const prev = stack.pop()
+            const crev = nums2[i]
+            map.set(prev, crev)
         }
-        
-        stack.push(i)
+        stack.push(nums2[i])
     }
-    
-    for(let i=0; i<stack.length; i++){
-        map.set(nums2[stack[i]], -1)
+
+    // stack 에 남아있는 경우 => 다음 요소에 자신 보다 큰 요소가 없는 경우
+    while(stack.length){
+        map.set(stack.pop(),-1)
     }
-    
-    return nums1.map(v => map.get(v))
+
+    return nums1.map(num=>map.get(num))
 };
