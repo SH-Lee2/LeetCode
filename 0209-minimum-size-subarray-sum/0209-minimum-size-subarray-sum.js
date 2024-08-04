@@ -4,16 +4,16 @@
  * @return {number}
  */
 var minSubArrayLen = function(target, nums) {
-    let left = 0, ans = Infinity, curr = 0
+    let sum=0, minSize=nums.length, len=nums.length, left=0
 
-    for(let right=0; right<nums.length; right++){
-        curr += nums[right]
+    for(let right=0; right<len; right++){
+        sum += nums[right]
 
-        while(curr >= target){
-            ans = Math.min (ans, right-left+1)
-            curr -= nums[left++]
+        while(sum >= target){
+            minSize = Math.min(minSize, right - left + 1)
+            sum -= nums[left++]
         }
     }
 
-    return ans === Infinity ? 0 : ans
+    return left === 0 ? 0 : minSize
 };
